@@ -1,0 +1,198 @@
+/* ==========================================
+   RESET & BASE STYLES
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    /* Latar belakang aurora gradasi yang dinamis */
+    background: linear-gradient(135deg, #fbc5d8, #ffecd2, #fcb69f, #ee9ca7);
+    background-size: 400% 400%;
+    animation: auroraBackground 15s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    padding: 20px;
+}
+
+/* ==========================================
+   CARD CONTAINER & EFFECTS (GLASSMORPHISM)
+   ========================================== */
+.card-container {
+    perspective: 1000px;
+    animation: cubicFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    width: 100%;
+    max-width: 420px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    padding: 45px 35px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(238, 156, 167, 0.25),
+                0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Efek hover halus pada kartu */
+.card:hover {
+    transform: translateY(-8px) scale(1.01);
+}
+
+/* ==========================================
+   ELEMENT STYLES
+   ========================================== */
+.icon {
+    font-size: 55px;
+    margin-bottom: 20px;
+    display: inline-block;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+    animation: softFloat 4s ease-in-out infinite;
+}
+
+h1 {
+    background: linear-gradient(45deg, #d946ef, #ec4899, #f43f5e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.3rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+}
+
+.message {
+    color: #4c4e61;
+    line-height: 1.7;
+    margin-bottom: 30px;
+    font-size: 1.05rem;
+    font-weight: 400;
+    text-align: center;
+}
+
+.signature {
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    color: #6b7280;
+    margin-bottom: 35px;
+    font-size: 0.95rem;
+    position: relative;
+    display: inline-block;
+}
+
+.signature::before {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 25%;
+    width: 50%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #ec4899, transparent);
+}
+
+/* ==========================================
+   BUTTON STYLES (MODERN INTERACTIVE)
+   ========================================== */
+button {
+    background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+    color: white;
+    border: none;
+    padding: 14px 32px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(244, 63, 94, 0.35);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(244, 63, 94, 0.45);
+    background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 0 4px 10px rgba(244, 63, 94, 0.3);
+}
+
+/* Efek kilatan cahaya (glow reflection) saat tombol muncul/di-hover */
+button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+    transition: 0.75s;
+    opacity: 0;
+}
+
+button:hover::after {
+    opacity: 1;
+    left: 125%;
+}
+
+/* ==========================================
+   CONFETTI PARTICLES
+   ========================================== */
+.confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 4px; /* Campuran kotak dan bulat */
+    animation: particleExplosion 1.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+    pointer-events: none;
+    z-index: 999;
+}
+
+/* ==========================================
+   ANIMATIONS CODE
+   ========================================== */
+@keyframes auroraBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes cubicFadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(40px) scale(0.95); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+    }
+}
+
+@keyframes softFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(5deg); }
+}
+
+@keyframes particleExplosion {
+    0% { 
+        transform: translate(0, 0) scale(1.5) rotate(0deg); 
+        opacity: 1; 
+    }
+    100% { 
+        transform: translate(var(--x), var(--y)) scale(0) rotate(360deg); 
+        opacity: 0; 
+    }
+}
